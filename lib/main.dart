@@ -16,27 +16,26 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   var temp;
   var description;
   var currently;
   var humidity;
-  var windSpeed;
-
+  var windspeed;
   Future getweather() async {
-    var url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?q=Texas&units=imperial&appid=c616549b38efc6ee77013aa971416fe5");
-    http.Response response = await http.get(url);
+    http.Response response = await http.get("http://api.openweathermap.org/data/2.5/weather?q=Texas&units=imperial&appid=c616549b38efc6ee77013aa971416fe5");
     var results = jsonDecode(response.body);
-    setState(() {
+    setState((){
       this.temp = results['main']['temp'];
-      this.description = results['weather'][0]['description'];
-      this.currently = results['weather'][0]['main'];
+      this.description = results['weather']['0']['description'];
+      this.currently = results['weather']['0']['main'];
       this.humidity = results['main']['humidity'];
-      this.windSpeed = results['wind']['speed'];
+      this.windspeed = results['wind']['speed'];
     });
   }
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     this.getweather();
   }
@@ -62,13 +61,13 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Text(
-                  temp != null ? temp.toString() + "\u00B0" : "Loading",
+                  temp != null? temp.toString() + "\u00B0" : "Loading",
                   style: TextStyle(color: Colors.white, fontSize: 40.0, fontWeight: FontWeight.w600),
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.0),
                   child: Text(
-                    currently != null ? currently.toString() : "Loading",
+                    currently != null? currently.toString() : "Loading",
                     style: TextStyle(color: Colors.white, fontSize: 14.0, fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -83,22 +82,22 @@ class _HomeState extends State<Home> {
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.thermometerHalf),
                     title: Text("Temperature"),
-                    trailing: Text(temp != null ? temp.toString() + "\u00B0" : "Loading"),
+                    trailing: Text(temp != null? temp.toString() + "\u00B0" : "Loading"),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.cloud),
                     title: Text("Weather"),
-                    trailing: Text(description != null ? description.toString() : "Loading"),
+                    trailing: Text(description != null? description.toString() : "Loading"),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.sun),
                     title: Text("Humidity"),
-                    trailing: Text(humidity != null ? humidity.toString() : "Loading"),
+                    trailing: Text(humidity != null? humidity.toString() : "Loading"),
                   ),
                   ListTile(
                     leading: FaIcon(FontAwesomeIcons.wind),
                     title: Text("Wind Speed"),
-                    trailing: Text(windSpeed != null ? windSpeed.toString() : "Loading"),
+                    trailing: Text(windSpeed != null? windSpeed.toString() : "Loading"),
                   ),
                 ],
               ),

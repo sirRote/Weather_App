@@ -1,3 +1,4 @@
+<img width="225" alt="my app" src="https://user-images.githubusercontent.com/33792067/124375754-ad708f80-dc58-11eb-9261-bc57e87da805.PNG">
 # My First WeatherApp
 
 A new Flutter project created with [FlutLab](https://flutlab.io)
